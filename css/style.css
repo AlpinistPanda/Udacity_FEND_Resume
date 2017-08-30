@@ -34,7 +34,7 @@ h1 {
 h2 {
   font-weight: bold;
   font-size: 24px;
-  color: #999;
+  color: #484848;
   line-height: 29px;
   padding: 10px;
 }
@@ -90,6 +90,14 @@ a {
   text-decoration: none;
   margin-top: 10px;
   display: block;
+}
+
+.panel-title{
+  font-size: 30px;
+}
+
+.panel-title a{
+  color: #484848;
 }
 
 .welcome-message {
@@ -169,6 +177,7 @@ img {
 
 span {
   padding: 5px;
+  color: white;
 }
 
 #lets-connect {
