@@ -32,32 +32,17 @@ var bio = {
     $("#header").prepend(formattedName);
 
     var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-    $("#topContacts").append(formattedMobile);
-    $("#footerContacts").append(formattedMobile);
-
     var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-    $("#topContacts").append(formattedEmail);
-    $("#footerContacts").append(formattedEmail);
-
     var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-    $("#topContacts").append(formattedGithub);
-    $("#footerContacts").append(formattedGithub);
-
     var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-    $("#topContacts").append(formattedTwitter);
-    $("#footerContacts").append(formattedTwitter);
-
     var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-    $("#topContacts").append(formattedLocation);
-    $("#footerContacts").append(formattedLocation);
+    $("#topContacts, #footerContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
+
 
     var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
-    $("#header").append(formattedPic);
-
     var formattedWelcome = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-    $("#header").append(formattedWelcome);
+    $("#header").append(formattedPic, formattedWelcome, HTMLskillsStart);
 
-    $("#header").append(HTMLskillsStart);
 
     bio.skills.forEach(function(skill){
       var formattedSkill = HTMLskills.replace("%data%", skill);
@@ -117,14 +102,10 @@ var education = {
           formattedSchoolName = formattedSchoolName.replace("#", school.url);
           var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
           var formattedSchoolNameAndDegree = formattedSchoolName + formattedSchoolDegree;
-          $(".education-entry:last").append(formattedSchoolNameAndDegree);
-
-
           var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
-          $(".education-entry:last").append(formattedSchoolLocation);
-
           var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
-          $(".education-entry:last").append(formattedSchoolDates);
+
+          $(".education-entry:last").append(formattedSchoolNameAndDegree, formattedSchoolLocation, formattedSchoolDates);
 
           school.majors.forEach(function(major){
              var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", major);
@@ -139,12 +120,9 @@ var education = {
          formattedCourseName = formattedCourseName.replace("#", course.url);
          var formattedCourseSchool = HTMLonlineSchool.replace("%data%", course.school);
          var formattedCourseNameAndSchool = formattedCourseName + formattedCourseSchool;
-         $(".education-entry:last").append(formattedCourseNameAndSchool);
-
-
          var formattedCourseDates = HTMLonlineDates.replace("%data%", course.dates);
-         $(".education-entry:last").append(formattedCourseDates);
 
+         $(".education-entry:last").append(formattedCourseNameAndSchool, formattedCourseDates);
        });
       }
  };
@@ -156,7 +134,6 @@ var work = {
   "jobs": [
     {
       "employer": "Future Cities Laboratory",
-      "link": "http://www.fcl.ethz.ch/",
       "title": "PhD Researcher",
       "location": "Singapore",
       "dates": "2016-current",
@@ -164,7 +141,6 @@ var work = {
     },
     {
       "employer": "Sobek Travel",
-      "link": "http://www.sobektrekking.com/",
       "title": "Mountain Guide",
       "location": "Nigde, Turkey",
       "dates": "2004-2009",
@@ -177,22 +153,13 @@ var work = {
         $("#workExperience").append(HTMLworkStart);
 
         var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
-        formattedEmployer = formattedEmployer.replace("#", job.link);
         var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
         var formattedEmployerAndTitle = formattedEmployer + formattedTitle;
-        $(".work-entry:last").append(formattedEmployerAndTitle);
-
         var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
-        $(".work-entry:last").append(formattedLocation);
-
         var formattedDates = HTMLworkDates.replace("%data%", job.dates);
-        $(".work-entry:last").append(formattedDates);
-
         var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
-        $(".work-entry:last").append(formattedDescription);
-
+        $(".work-entry:last").append(formattedEmployerAndTitle, formattedLocation, formattedDates, formattedDescription);
       });
-
     }
 };
 
@@ -204,7 +171,7 @@ var projects = {
       "title": "Smart Shopping Systems",
       "dates": "2007",
       "description": "This is a device to help shoppers with in grocery shops",
-      "images": "images/197x148.gif"
+      "images": ["images/197x148.gif", "images/197x148.gif"]
     }
   ],
   display: function(){
@@ -213,16 +180,15 @@ var projects = {
       $("#projects").append(HTMLprojectStart);
       //
       var formattedProjectTitle = HTMLprojectTitle.replace("%data%", project.title);
-      $(".project-entry:last").append(formattedProjectTitle);
-
       var formattedProjectDate = HTMLprojectDates.replace("%data%", project.dates);
-      $(".project-entry:last").append(formattedProjectDate);
-
       var formattedProjectDescription = HTMLprojectDescription.replace("%data%", project.description);
-      $(".project-entry:last").append(formattedProjectDescription);
+      $(".project-entry:last").append(formattedProjectTitle, formattedProjectDate, formattedProjectDescription);
 
-      var formattedProjectImage = HTMLprojectImage.replace("%data%", project.images);
-      $(".project-entry:last").append(formattedProjectImage);
+      // I dont have the image for the project so I put placeholder images
+      project.images.forEach(function(image){
+        var formattedProjectImage = HTMLprojectImage.replace("%data%", image);
+        $(".project-entry:last").append(formattedProjectImage);
+      });
     });
   }
 
